@@ -195,14 +195,15 @@ function virtio_cdrom() {
 }
 
 nic_counter=$(counter_create 0)
-function network() {
+function network() { 
   # model, mode (tap or bridge), tap name / bridge
+  # model, tap, tap name, mac address
   nic="nic$(counter_read $nic_counter)"
   counter_increment $nic_counter
 
-  append "-device $1,netdev=$nic"
   case "$2" in
     "tap")
+      append "-device $1,netdev=$nic,mac=$4"
       append "-netdev tap,id=$nic,ifname=$3,script=no,downscript=no"
       ;;
     *)

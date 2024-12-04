@@ -43,7 +43,7 @@ Path calculation:
 
 ```ide_cdrom "path"```, ```sata_cdrom "path"```, ```virtio_cdrom "path"``` - creates IDE/SATA/Virtio CDROMs, where "path" must be full path to file.
 
-```network "device-model" "type" "name"``` - create network device. For model, you either specify ```e1000```, when guest doesn't have virtio drivers, or ```virtio-net``` for virtio network device. Type only supports ```tap```, where name is name of the tap (that You probably want to add to bridge)
+```network "device-model" "tap" "tap-name" "mac-address"``` - create network device. For model, you either specify ```e1000```, when guest doesn't have virtio drivers, or ```virtio-net``` for virtio network device. Example: ```network "virtio-net" "tap" "vnet0tap1" "52:54:00:12:34:56"```
 
 ```kuemu_start``` - finishes QEMU argument building and spawns virtual machine.
 
@@ -65,7 +65,7 @@ monitor
 spice
 uefi
 virtio_disk ""
-network   "virtio-net" "tap" "vnet0tap1"
+network   "virtio-net" "tap" "vnet0tap1" "d6:7d:05:31:93:61"
 
 kuemu_start
 ```
@@ -87,7 +87,7 @@ monitor
 spice
 uefi
 sata_disk ""
-network   "e1000" "tap" "vnet0tap1"
+network   "e1000" "tap" "vnet0tap1" "d6:7d:05:31:93:61"
 
 kuemu_start
 ```
